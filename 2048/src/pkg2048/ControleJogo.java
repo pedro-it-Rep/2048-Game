@@ -37,10 +37,12 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
         setFocusable(true); 
         setPreferredSize(new Dimension(larguraJogo, alturaJogo)); //Seta o tamanho da tela
         addKeyListener(this); //Verifica se alguma tecla esta sendo pressionada
+        
     }
     
     private void AtualizaJogo(){
-   
+        
+        VerificaMovimentos.VerificaTecla(); //Chama a função que verifica qual tecla está sendo pressionada
     }
     
     //Metodo usado para renderizar as peças do jogo
@@ -61,29 +63,51 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
     
     @Override
     public void keyTyped(KeyEvent tecla) {
-        
+    
     }
 
     @Override
     public void keyPressed(KeyEvent tecla) {
+        
+        VerificaMovimentos.TeclaPressionada(tecla);
         
     }
 
     @Override
     public void keyReleased(KeyEvent tecla) {
         
+        VerificaMovimentos.TeclaSemPressionar(tecla);
+        
     }
 
-    @Override
+      @Override
     //Necessario ser implementado para a inicialização da thread.
     public void run() {
        
         int atualizacao = 0;//Flag para atualizar o jogo
+        double taxaAtualizacaoNS = 1000000000.0 / 60; //Define qual vai ser o tempo de cada atualização do jogo
+        
+        double tempoPreAtualizacao = System.nanoTime(); //Pega o tempo do sistema em nano Segundos
+
+
+        double unprocessed = 0;
         
         while(estaRodando){ //Verifica se o jogo esta rodando
         
         boolean renderizaJogo = false; 
+        
+        double tempoAtual = System.nanoTime(); //Pega o tempo do sistema em nano Segundos
+        unprocessed = unprocessed + (tempoAtual - tempoPreAtualizacao) / taxaAtualizacaoNS; 
+        tempoPreAtualizacao = tempoAtual;
+        
+            while (unprocessed >= 1) {
+                atualizacao++; //Numero de atualizações feitas
+                AtualizaJogo(); //Chama a função para atualizar o jogo
+                unprocessed--;
+                estaRodando = true;
 
+            }
+        
         if(renderizaJogo){
             
             RenderizaJogo();
@@ -102,6 +126,7 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
         }
         
     }
+    
     
    //synchronized =  permite que mais de 1 Thread use o metodo, possibilitando algo sincronizado
   //Metodo que atraves das Threads, inicia o jogo 
