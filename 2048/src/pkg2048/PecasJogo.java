@@ -11,8 +11,8 @@ public class PecasJogo {
     public static final int larguraPeca = 80; //Define a largura da peça
     public static final int alturaPeca = 80; //Define a altura da peça
     public static final int atualizacaoPeca = 20; //Define a velocidade que a peça vai andar
-    public static final int curvaLargura = 80; //Usado para fazer a curva na peça, igual ao jogo original
-    public static final int curvaAltura = 80; //Usado para fazer a curva na peça, igual ao jogo original
+    public static final int curvaLargura = 10; //Usado para fazer a curva na peça, igual ao jogo original
+    public static final int curvaAltura = 10; //Usado para fazer a curva na peça, igual ao jogo original
     
     private int valorPeca; //Verifica o valor da peça
     private BufferedImage imagemPeca; //Define a imagem da peça, que vai ser mostrada para o usuario.
@@ -113,5 +113,17 @@ public class PecasJogo {
             
             aux.drawString("" +valorPeca, centroX, centroY); //Desenha o valor da peça no centro, como uma string
             aux.dispose(); //Libera os recursos antes usados, liberando para novos usos
-    }   
-}   
+    }
+    
+    public void AtualizaJogo(){
+        
+    }
+    
+    public void RenderizaJogo(Graphics2D aux){
+        aux.drawImage(imagemPeca, x, y, null);
+    }
+    
+    public int PegaValor(){
+        return valorPeca;
+    }
+}

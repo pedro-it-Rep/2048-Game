@@ -18,14 +18,15 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
     //static = não pode ser alterado ao longo o programa, tendo o mesmo valor para qualquer objeto.
     //final = mantem um valor constante para a instancia que foi declarada.
     //static final = mantem o valor de uma variavel até o fim de um programa.
-    public static final int larguraJogo = 500;
-    public static final int alturaJogo = 730;
+    public static final int larguraJogo = 400;
+    public static final int alturaJogo = 630;
     
     //Define a fonte (letras) do jogo
-    public static final Font main = new Font("Clear Sans", Font.PLAIN, 28); 
+    public static final Font main = new Font("Century Gothic", Font.PLAIN, 28); 
     
     private Thread jogo; //Inicia uma Thread para o jogo
     private boolean estaRodando; //Verificar se o jogo está rodando
+    private FundoJogo tabuleiro;
     
     //TYPE_INT_RGB - define a cor dos objetos como um inteiro, e ignora o canal principal de cores
     private BufferedImage fundoTela = new BufferedImage(larguraJogo, alturaJogo, BufferedImage.TYPE_INT_RGB); //Carrega o background do jogo na memoria
@@ -38,10 +39,14 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
         setPreferredSize(new Dimension(larguraJogo, alturaJogo)); //Seta o tamanho da tela
         addKeyListener(this); //Verifica se alguma tecla esta sendo pressionada
         
+        
+        tabuleiro = new FundoJogo(larguraJogo / 2 - FundoJogo.larguraTabuleiro / 2, alturaJogo - FundoJogo.alturaTabuleiro - 10);
+        
     }
     
-    private void AtualizaJogo(){
+    private void AtualizaJogo(){    
         
+        tabuleiro.AtualizaJogoTabuleiro();
         VerificaMovimentos.VerificaTecla(); //Chama a função que verifica qual tecla está sendo pressionada
     }
     
@@ -51,6 +56,7 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
         Graphics2D aux = (Graphics2D) fundoTela.getGraphics(); //Usado para definir a cor do background
         aux.setColor(Color.WHITE); //Define o fundo da tela como branco.
         aux.fillRect(0, 0, larguraJogo, alturaJogo); //Preenche o espaço definido
+        tabuleiro.Renderizacao(aux);
         aux.dispose(); //Libera os recursos antes usados, liberando para novos usos
         
         Graphics2D aux2 = (Graphics2D) getGraphics(); //Usado para carregar a imagem
@@ -84,45 +90,42 @@ public class ControleJogo extends JPanel implements KeyListener, Runnable{
     //Necessario ser implementado para a inicialização da thread.
     public void run() {
        
-        int atualizacao = 0;//Flag para atualizar o jogo
-        double taxaAtualizacaoNS = 1000000000.0 / 60; //Define qual vai ser o tempo de cada atualização do jogo
-        
-        double tempoPreAtualizacao = System.nanoTime(); //Pega o tempo do sistema em nano Segundos
+        int atualizacao = 0;
+        double taxaAtualizacaoNS = 1000000000.0 / 60;
 
+        //Ultimo update em nanoseg
+        double antesAtualizacao = System.nanoTime();
 
+        //Updates necessários - caso der erro em render()
         double unprocessed = 0;
-        
-        while(estaRodando){ //Verifica se o jogo esta rodando
-        
-        boolean renderizaJogo = false; 
-        
-        double tempoAtual = System.nanoTime(); //Pega o tempo do sistema em nano Segundos
-        unprocessed = unprocessed + (tempoAtual - tempoPreAtualizacao) / taxaAtualizacaoNS; 
-        tempoPreAtualizacao = tempoAtual;
-        
+
+        while(estaRodando) {
+
+            boolean shouldRender = false;
+
+            double tempoAtual = System.nanoTime();
+            unprocessed = unprocessed + (tempoAtual - antesAtualizacao) / taxaAtualizacaoNS;
+            antesAtualizacao = tempoAtual;
+
             while (unprocessed >= 1) {
-                atualizacao++; //Numero de atualizações feitas
-                AtualizaJogo(); //Chama a função para atualizar o jogo
+                atualizacao++;
+                AtualizaJogo();
                 unprocessed--;
-                estaRodando = true;
+                shouldRender = true;
 
             }
-        
-        if(renderizaJogo){
-            
-            RenderizaJogo();
-            renderizaJogo = false;
-            
-        } else {
-            //Se der algum erro durante a execução do jogo
-            try{
-                Thread.sleep(1);
-                
-            }catch(Exception e){
-                
-                e.printStackTrace();
-            }    
-        }
+
+            if (shouldRender) {
+
+                RenderizaJogo();
+                shouldRender = false;
+            } else {
+                try {
+                    Thread.sleep(1); //Sleep thread -> shouldRender = false
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
         
     }
