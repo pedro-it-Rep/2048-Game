@@ -17,24 +17,47 @@ public class VerificaMovimentos {
         
         int i;
         
-        for(i=0; i < 8; i++){
-            
-        try{   
-            if(i == 0) teclaLevantada[KeyEvent.VK_LEFT] = teclaPressionada[KeyEvent.VK_LEFT];
-            if(i == 1) teclaLevantada[KeyEvent.VK_RIGHT] = teclaPressionada[KeyEvent.VK_RIGHT];
-            if(i == 2) teclaLevantada[KeyEvent.VK_UP] = teclaPressionada[KeyEvent.VK_UP];
-            if(i == 3) teclaLevantada[KeyEvent.VK_DOWN] = teclaPressionada[KeyEvent.VK_DOWN];
+        for(i=0; i < 8; i++){    
+       
+       try{
+           
+           switch(i){
+               
+               case 0:
+                   teclaLevantada[KeyEvent.VK_LEFT] = teclaPressionada[KeyEvent.VK_LEFT];
+                   break;
+                   
+               case 1:
+                   teclaLevantada[KeyEvent.VK_RIGHT] = teclaPressionada[KeyEvent.VK_RIGHT];
+                   break;
+                   
+               case 2:
+                   teclaLevantada[KeyEvent.VK_UP] = teclaPressionada[KeyEvent.VK_UP];
+                   break;
+                   
+               case 3:
+                   teclaLevantada[KeyEvent.VK_DOWN] = teclaPressionada[KeyEvent.VK_DOWN];
+                   break;
+                   
+               case 4:
+                   teclaLevantada[KeyEvent.VK_W] = teclaPressionada[KeyEvent.VK_W];
+                   break;
+                   
+               case 5:
+                   teclaLevantada[KeyEvent.VK_A] = teclaPressionada[KeyEvent.VK_A];
+                   break;
+                   
+               case 6:
+                   teclaLevantada[KeyEvent.VK_S] = teclaPressionada[KeyEvent.VK_S];
+                   break;
+                   
+               case 7:
+                   teclaLevantada[KeyEvent.VK_D] = teclaPressionada[KeyEvent.VK_D];
+                   break;
+               
+           }
+ 
             }catch(Exception e){}
-            
-         
-        
-         try{
-            if(i == 4) teclaLevantada[KeyEvent.VK_W] = teclaPressionada[KeyEvent.VK_W];
-            if(i == 5) teclaLevantada[KeyEvent.VK_A] = teclaPressionada[KeyEvent.VK_A];
-            if(i == 6) teclaLevantada[KeyEvent.VK_S] = teclaPressionada[KeyEvent.VK_S];
-            if(i == 7) teclaLevantada[KeyEvent.VK_D] = teclaPressionada[KeyEvent.VK_D];
-         }catch(Exception e){}
-
         }
     }  
     
