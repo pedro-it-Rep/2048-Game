@@ -27,6 +27,7 @@ OBS: Se o jogo estiver muito dificil de ser concluido, escondemos um botão na t
 Para Jogar:
 
 → Vá na aba Releases aqui no Github e faça o download do arquivo .zip do ultimo lançamento.
+
 → Carregue o arquivo na sua IDE de preverencia.
 
 OBS: Todo o projeto foi desenvolvido com o NetBeans 8.2, outras IDEs podem não rodar o projeto como esperado.
