@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 public class Jogo {
 
     public static void main(String[] args) {
-      
+      try{
     JFrame game = new JFrame();
     game.setTitle("2048 Game");
     game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -18,6 +18,7 @@ public class Jogo {
     game.setLocationRelativeTo(null);
     game.setVisible(true);
         
+    }catch(Exception e){System.out.println("Erro na inicialização do programa");}
     }
     
 }
