@@ -14,7 +14,7 @@ import java.util.List;
 import jogo.Peca.EspecPeca; //Chamar uma sub-Classe
 
 //Extende o painel, permitindo fazer alterações nele
-public class Controle extends JPanel implements ActionListener{
+public final class Controle extends JPanel implements ActionListener{
     
     public int oldX;
     public int oldY;
@@ -25,12 +25,12 @@ public class Controle extends JPanel implements ActionListener{
     
     public int x,y;
     
- private static final Color corFundo = new Color(0xffffff); //Seta a cor do background
+  private static final Color corFundo = new Color(0xffffff); //Seta a cor do background
   private static final String fonteJogo = "ARIAL"; //Seta a fonte do jogo
   private static final int tamanhoPeca = 64; //Seta o tamanho da peça
   private static final int margemPeca = 16; //Seta o tamanho do espaço das peças
   
-  private EspecPeca[] pecas; //Vetor com as peças
+  public EspecPeca[] pecas; //Vetor com as peças
   boolean condVitoria = false; //Inicia a condiçao de vitoria como falsa
   boolean condDerrota = false; //Inicia a condiçao de derrota como falsa
   int pontuacao = 0, highScore; //Inica a pontuação com 0
@@ -228,12 +228,12 @@ public class Controle extends JPanel implements ActionListener{
   }
 
   //Usado para atualizar as peças durante o jogo
-  private EspecPeca AtualizaPecas(int x, int y) {
+  public EspecPeca AtualizaPecas(int x, int y) {
     return pecas[x + y * 4]; //Retorna a posição da peça, * 4 por causa do tamanho do tabuleiro
   }
 
   //Adiciona uma nova peça no jogo
-  private void AdicionaPeca() {
+  public void AdicionaPeca() {
       //List facilita na aplicação do vetor
     List<EspecPeca> list = EspacoDisponivel(); //Lista Ligada feita para adicionar uma nova peça de forma aleatoria
     if (!EspacoDisponivel().isEmpty()) { //Se tiver lugar disponivel

@@ -4,6 +4,7 @@ package jogo;
 import java.awt.Color;
 
 public class Peca {
+    
     //Cria uma sub-classe que não tera seu valor alterado
     static class EspecPeca {
     int value; //Valor da peça
