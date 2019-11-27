@@ -11,10 +11,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jogo.Peca.EspecPeca; //Chamar uma sub-Classe
 
 //Extende o painel, permitindo fazer alterações nele
-public class Controle extends JPanel implements ActionListener{
+public final class Controle extends JPanel implements ActionListener{
     
     public int oldX;
     public int oldY;
@@ -36,6 +38,9 @@ public class Controle extends JPanel implements ActionListener{
   int pontuacao = 0, highScore; //Inica a pontuação com 0
   
   JButton win = new JButton("Easy Win");
+  
+   ClienteWS Movi=new ClienteWS();
+   public StringBuffer movimento = new StringBuffer();
 
   public Controle() {
     setPreferredSize(new Dimension(350, 450)); 
@@ -97,7 +102,7 @@ public class Controle extends JPanel implements ActionListener{
             repaint(); //PintaNovamente o background
         }   
     
-    });
+    });   
     
     addKeyListener(new KeyAdapter() { //Adiciona um "Ouvinte" da tecla 
      
@@ -108,6 +113,7 @@ public class Controle extends JPanel implements ActionListener{
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { //Se for apertado ESC, reinicia o jogo
           Reinicio();
         }
+        
         //Se n tiver mais movimentos, perdeu o jogo
         if (!VerificaMovimento()) {
           condDerrota = true;
@@ -139,8 +145,7 @@ public class Controle extends JPanel implements ActionListener{
               break;
             case KeyEvent.VK_W:
               MovCima();
-              break; 
-              
+              break;     
           }
           }catch(Exception Erro){System.out.println("Erro na detecção do teclado");}
         }
@@ -149,11 +154,12 @@ public class Controle extends JPanel implements ActionListener{
         if (!condVitoria && !VerificaMovimento()) {
           condDerrota = true;
         }
-        
+        runMicroService();
         repaint(); //PintaNovamente o background, atualizando o jogo
       }
     });
-    Reinicio(); //Reinica o game
+    
+    Reinicio(); //Reinicia o game
   }
   
     //Reinica o game
@@ -406,6 +412,7 @@ public class Controle extends JPanel implements ActionListener{
 
   //Usado para printar as peças no JPanel, colocando a cor no game
   private void desenhaPeca(Graphics g2, EspecPeca tile, int x, int y) {
+ 
     Graphics2D g = ((Graphics2D) g2);
     g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
@@ -475,5 +482,53 @@ public class Controle extends JPanel implements ActionListener{
     ReinicioEasy();
     
     
+    }
+    
+    public void runMicroService() { //funcao chamada na Janela.java PARA rodar a hellokitty - thread
+       
+        Runnable Run;
+        Run = new Runnable() { //thread
+            public void run() {
+                
+                while(true){
+                    try {
+                        movimento=Movi.sendGet();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    System.out.println("\nmovimento: "+ movimento);
+                    if(movimento.toString().contains("cima")){
+                        System.out.println("dentro do if cima: "+movimento);
+                        MovCima();
+                        repaint();
+                    }else if(movimento.toString().contains("baixo")){
+                        System.out.println("dentro do if baixo: "+movimento);
+                        MovBaixo();
+                        repaint();
+                    }else if(movimento.toString().contains("esquerda")){
+                        System.out.println("dentro do if esquerda: "+movimento);
+                        MovEsquerda();
+                        repaint();
+                    }else if(movimento.toString().contains("direita")){
+                        System.out.println("dentro do if direita: "+movimento);
+                        MovDireita();
+                        repaint();
+                    }else if(movimento.toString().contains("resetar")){
+                        System.out.println("dentro do if resetar: "+movimento);
+                        Reinicio();
+                    }
+                     
+                    else System.out.println("erro!!!");
+                    
+                    
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {}
+                }
+            }
+        };
+        Thread MS = new Thread(Run);
+        MS.start();  
     }
 }
