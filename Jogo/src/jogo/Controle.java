@@ -517,6 +517,7 @@ public final class Controle extends JPanel implements ActionListener{
                     }else if(movimento.toString().contains("resetar")){
                         System.out.println("dentro do if resetar: "+movimento);
                         Reinicio();
+                        repaint();
                     }
                      
                     else System.out.println("erro!!!");

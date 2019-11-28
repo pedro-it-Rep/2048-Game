@@ -30,13 +30,13 @@ public class HttpExemplo {
                 System.out.println("--\n------"+json+"teste json----");
                 Gson g= new Gson();
                 
-                Usuario u = new Usuario();
-                Type usuarioType= new TypeToken<Usuario>(){}.getType();
-                u=g.fromJson(json,usuarioType);
+             //   Usuario u = new Usuario();
+             //   Type usuarioType= new TypeToken<Usuario>(){}.getType();
+             //   u=g.fromJson(json,usuarioType);
 
                // u.getLogin(Movimento);
                // Movimento=Usuario.toString(u.getLogin);
-                setMovimento(u.getLogin());
+             //   setMovimento(u.getLogin());
                 System.out.println(Movimento);
 	}
  

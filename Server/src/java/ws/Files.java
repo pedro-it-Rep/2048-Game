@@ -1,11 +1,5 @@
 package ws;
 
-/**
- *
- * @author 18726471
- */
-
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,17 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
-/**
- *
- * @author victorreis
- */
 public class Files {
     
-    String Caminho =new String("C:\\Users\\18016568\\Downloads\\2048-Game-master-20191127T125056Z-001\\2048-Game-master\\Jogo\\src\\direction.txt");
+    String Caminho = new String("C:\\Users\\18016568.LAB-INF.000\\Downloads\\2048-Game-3.0\\2048-Game-3.0\\Jogo\\src\\direction.txt");
 
-
-    String Vari =new String();
+    String Variavel = new String();
     public Files()
     {
     
@@ -31,9 +19,9 @@ public class Files {
     public static String Read(){
         String conteudo = "";
         try {
-            FileReader arq = new FileReader("C:\\Users\\18016568\\Downloads\\2048-Game-master-20191127T125056Z-001\\2048-Game-master\\Jogo\\src\\direction.txt");
+            FileReader camArq = new FileReader("C:\\Users\\18016568.LAB-INF.000\\Downloads\\2048-Game-3.0\\2048-Game-3.0\\Jogo\\src\\direction.txt");
             
-            BufferedReader lerArq = new BufferedReader(arq);
+            BufferedReader lerArq = new BufferedReader(camArq);
             String linha="";
             try {
                 linha = lerArq.readLine();
@@ -41,7 +29,7 @@ public class Files {
                     conteudo += linha;
                     linha = lerArq.readLine();
                 }
-                arq.close();
+                camArq.close();
                 return conteudo;
             } catch (IOException ex) {
                 System.out.println("Erro: Não foi possível ler o arquivo!");
@@ -55,8 +43,8 @@ public class Files {
     
     public static boolean Write(String Texto){
         try {
-            FileWriter arq = new FileWriter("C:\\Users\\18016568\\Downloads\\2048-Game-master-20191127T125056Z-001\\2048-Game-master\\Jogo\\src\\direction.txt");
-            PrintWriter gravarArq = new PrintWriter(arq);
+            FileWriter camArq = new FileWriter("C:\\Users\\18016568.LAB-INF.000\\Downloads\\2048-Game-3.0\\2048-Game-3.0\\Jogo\\src\\direction.txt");
+            PrintWriter gravarArq = new PrintWriter(camArq);
             gravarArq.println(Texto);
             gravarArq.close();
             return true;
@@ -67,11 +55,11 @@ public class Files {
     }
     
     public String getVari() {
-        return Vari;
+        return Variavel;
     }
 
-    public void setVari(String Vari) {
-        this.Vari = Vari;
+    public void setVari(String Variavel) {
+        this.Variavel = Variavel;
     }
 
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -18,15 +13,15 @@ import javax.ws.rs.PUT;
 
 /**
  * REST Web Service
- * @author VICTOR
  */
+
 @Path("Movimento")
 public class GameWS extends Files {
 
     @Context
     private UriInfo context;
     
-    String Var=new String("teste");
+    String Varivel = new String("teste");
     public GameWS() {
     }
     
@@ -34,9 +29,9 @@ public class GameWS extends Files {
     @Produces("application/Json")
     public String getJson() {
         
-        String saida=Read();
-        Gson g= new Gson();
-        String aux=g.toJson(saida);
+        String saida = Read();
+        Gson g = new Gson();
+        String aux = g.toJson(saida);
         Write("vazio");
         
         System.out.println(aux);
@@ -49,6 +44,6 @@ public class GameWS extends Files {
     public void putInserir(String content){
        //System.out.println(content);
         Write(content);
-        Var=content;
+        Varivel = content;
     }
 }
