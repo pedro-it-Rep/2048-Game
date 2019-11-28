@@ -1,9 +1,9 @@
-# <h1>2048-Game </h1>
+# 2048-Game 
 
 <h2>  Contribuidores: </h2> 
 
-→ <p> Fabricio Silva Cardoso </p> 
-→ <p> Pedro Ignácio Trevisan </p> 
+<p>→ Fabricio Silva Cardoso </p> 
+<p>→ Pedro Ignácio Trevisan </p> 
 
 <h2> Sobre o jogo: </h2>
 
