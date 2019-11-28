@@ -1,6 +1,6 @@
 # 2048-Game
 
-Contribuidores: 
+<h1> Contribuidores: <\h1> 
 
 Fabricio Silva Cardoso 
 
