@@ -1,12 +1,11 @@
-# 2048-Game
+# <h1>2048-Game </h1>
 
 <h2>  Contribuidores: </h2> 
 
-Fabricio Silva Cardoso 
+→ <p> Fabricio Silva Cardoso </p> 
+→ <p> Pedro Ignácio Trevisan </p> 
 
-Pedro Ignácio Trevisan
-
-Sobre o jogo:
+<h2> Sobre o jogo: </h2>
 
 • Movimentação com as setas, com WASD e com a movimentação do mouse;
 
@@ -16,7 +15,7 @@ Sobre o jogo:
 
 • Condição de Derrota: o jogo é finalizado com derrota quando não existir mais movimentos disponiveis;
 
-Detalhes de projeto:
+<h2> Detalhes de projeto: </h2>
 
 • Jogo simples, onde o objetivo do projeto foi apenas fazer um clone do jogo original;
 
@@ -24,7 +23,7 @@ Detalhes de projeto:
 
 OBS: Se o jogo estiver muito dificil de ser concluido, escondemos um botão na tela que pode facilitar a sua solução;
 
-Para Jogar:
+<h2> Para Jogar: </h2>
 
 → Vá na aba Releases aqui no Github e faça o download do arquivo .zip do ultimo lançamento.
 
